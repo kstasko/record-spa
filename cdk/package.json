@@ -1,0 +1,21 @@
+{
+  "name": "cdk",
+  "app": "npx ts-node src/index.ts",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "echo 'no build here'",
+    "deploy": "cdk deploy --require-approval never",
+    "test": "echo 'no test here'"
+  },
+  "devDependencies": {
+    "@types/node": "10.17.27",
+    "typescript": "~3.9.7"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "aws-cdk-lib": "^2.57.0",
+    "constructs": "^10.1.203"
+  }
+}

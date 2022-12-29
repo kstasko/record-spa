@@ -1,0 +1,19 @@
+{
+  "name": "record-spa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "deploy": "yarn workspace cdk deploy",
+    "test": "yarn workspaces run test",
+    "start": "yarn workspace ui dev",
+    "verify": "yarn test & yarn build"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "cdk", "ui"
+  ]
+}
