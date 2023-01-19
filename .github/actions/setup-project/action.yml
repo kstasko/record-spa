@@ -2,6 +2,6 @@ name: 'Setup Project'
 description: 'Downloads project dependencies'
 runs:
   using: "composite"
-  shell: bash
   steps:
     - run: echo 'setup project'
+      shell: bash
