@@ -7,3 +7,8 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.13.1'
+
+    - name: Install Dependencies
+      working-directory: cdk
+      shell: bash
+      run: yarn install
