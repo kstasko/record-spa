@@ -1,6 +1,6 @@
 node_modules
-dist
 ui/public/build
 cdk.out
 ui/.cache
 cdk.out
+build
