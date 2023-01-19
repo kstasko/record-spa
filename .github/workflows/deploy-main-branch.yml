@@ -9,5 +9,8 @@ jobs:
   deploy-main-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Setup Project
+        uses: actions/setup-project@v1

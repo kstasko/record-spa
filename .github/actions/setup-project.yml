@@ -1,0 +1,6 @@
+name: 'Setup Project'
+description: 'Downloads project dependencies'
+runs:
+  using: "composite"
+  steps:
+    - run: echo 'setup project'
