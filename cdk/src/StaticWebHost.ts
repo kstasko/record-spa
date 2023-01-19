@@ -2,6 +2,7 @@ import {aws_s3, aws_cloudfront, aws_s3_deployment, CfnOutput, RemovalPolicy} fro
 import {Construct} from 'constructs';
 
 export class StaticWebHost extends Construct {
+    readonly cloudfrontDomain;
     constructor(construct: Construct, id: string) {
         super(construct, id);
 
@@ -44,14 +45,16 @@ export class StaticWebHost extends Construct {
         });
 
         new aws_s3_deployment.BucketDeployment(this, 'RecordDeploy', {
-            sources: [aws_s3_deployment.Source.asset(`${__dirname}/../../ui/dist`)],
+            sources: [aws_s3_deployment.Source.asset(`${__dirname}/../../ui/build`)],
             destinationBucket: recordSiteBucket,
             distribution: recordDistribution,
             distributionPaths: ["/*"],
             retainOnDelete: false
         });
 
-        new CfnOutput(this, 'cloufront domain name', { value: recordDistribution.distributionDomainName });
+        this.cloudfrontDomain = recordDistribution.distributionDomainName
+
+        new CfnOutput(this, 'cloudfront domain name', { value: this.cloudfrontDomain });
         new CfnOutput(this, 'cloufront id', { value: recordDistribution.distributionId })
 
     }
