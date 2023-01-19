@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - 'i1/*'
+permissions:
+  id-token: write
+  contents: read
 jobs:
   deploy-main-branch:
     runs-on: ubuntu-latest
@@ -14,3 +17,14 @@ jobs:
 
       - name: Setup Project
         uses: ./.github/actions/setup-project
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::467222377375:role/github-actions
+          region: us-east-2
+
+      - name: Build && Deploy
+        runs: |
+        yarn workspace ui build 
+        yarn workspace cdk deploy
