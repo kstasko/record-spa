@@ -1,10 +1,11 @@
 name: deploy-main-branch
 push:
+  workflow_dispatch:
   branches:
-  - main
-  - '*'
+    - main
+    - 'i1/*'
 jobs:
-  deploy-main-branch
+  deploy-main-branch:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
