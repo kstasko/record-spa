@@ -3,5 +3,7 @@ description: 'Downloads project dependencies'
 runs:
   using: "composite"
   steps:
-    - run: echo 'setup project'
-      shell: bash
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.13.1'
