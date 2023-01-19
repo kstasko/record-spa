@@ -1,0 +1,11 @@
+name: deploy-main-branch
+push:
+  branches:
+  - main
+  - '*'
+jobs:
+  deploy-main-branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
