@@ -54,7 +54,7 @@ export class StaticWebHost extends Construct {
 
         this.cloudfrontDomain = recordDistribution.distributionDomainName
 
-        new CfnOutput(this, 'cloufront domain name', { value: this.cloudfrontDomain });
+        new CfnOutput(this, 'cloudfront domain name', { value: this.cloudfrontDomain });
         new CfnOutput(this, 'cloufront id', { value: recordDistribution.distributionId })
 
     }
