@@ -1,9 +1,10 @@
 name: deploy-main-branch
-push:
-  workflow_dispatch:
-  branches:
-    - main
-    - 'i1/*'
+on:
+  push:
+    workflow_dispatch:
+    branches:
+      - main
+      - 'i1/*'
 jobs:
   deploy-main-branch:
     runs-on: ubuntu-latest
