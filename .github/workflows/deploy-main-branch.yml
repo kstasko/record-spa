@@ -24,7 +24,7 @@ jobs:
           role-to-assume: arn:aws:iam::467222377375:role/github-actions
           region: us-east-2
 
-      - name: Build && Deploy
-        runs: |
-        yarn workspace ui build 
-        yarn workspace cdk deploy
+      # - name: Build && Deploy
+      #   runs: |
+      #   yarn workspace ui build 
+      #   yarn workspace cdk deploy
