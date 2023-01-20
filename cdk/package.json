@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "echo 'no build here'",
-    "deploy": "cdk deploy --require-approval never",
+    "deploy": "aws cdk deploy --require-approval never",
     "test": "echo 'no test here'"
   },
   "devDependencies": {
