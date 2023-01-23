@@ -27,6 +27,11 @@ export class RecordSpaStack extends Stack {
             }
         });
 
+        const authorizer = new aws_apigateway.CognitoUserPoolsAuthorizer(this, 'RecordApiAuthorizer', {
+            authorizerName: 'cognito-user-authorizer',
+            cognitoUserPools: [userPool]
+        });
+
         const apiLambda = new aws_lambda.Function(this, 'RecordApi', {
             code: aws_lambda.Code.fromAsset(`${__dirname}/../../api/dist`),
             handler: 'lambda.handler',
@@ -39,14 +44,11 @@ export class RecordSpaStack extends Stack {
             defaultCorsPreflightOptions: {
                 allowOrigins: ['*'],
                 allowMethods: ['ANY']
+            },
+            defaultMethodOptions: {
+                authorizer,
+                authorizationType: aws_apigateway.AuthorizationType.COGNITO
             }
-        });
-
-        restApi.methods.forEach(method => {
-            const cfnMethod = method.node.defaultChild as aws_apigateway.CfnMethod;
-            cfnMethod.addPropertyOverride('ApiKeyRequired', false);
-            cfnMethod.addPropertyOverride('AuthorizationType', 'NONE');
-            cfnMethod.addPropertyDeletionOverride('AuthorizerId');
         });
 
     }
