@@ -1,5 +1,5 @@
-name: 'Setup Project'
-description: 'Downloads project dependencies'
+name: Setup Project
+description: Downloads project dependencies
 runs:
   using: "composite"
   steps:
@@ -9,6 +9,5 @@ runs:
         node-version: '16.13.1'
 
     - name: Install Dependencies
-      working-directory: cdk
       shell: bash
-      run: yarn install
+      run: yarn install --immutable --immutable-cache
