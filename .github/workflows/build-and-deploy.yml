@@ -1,0 +1,55 @@
+name: build-and-deploy
+on:
+  push:
+  workflow_dispatch:
+      
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Project
+        uses: ./.github/actions/setup-project
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ui-build
+          path: |
+            ui/build
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: api-build
+          path: |
+            api/build
+
+  deploy-main-branch:
+      if: github.ref_name == 'main'
+      runs-on: ubuntu-latest
+      steps:
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ui-build
+          path: |
+            ui/build
+      
+      - uses: actions/download-artifact@v3
+        with:
+          name: api-build
+          path: |
+            api/build
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::467222377375:role/github-actions
+          aws-region: us-east-2
+
+      - name: Deploy
+        run: yarn deploy

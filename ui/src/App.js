@@ -2,6 +2,7 @@ import './App.css';
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
+import { RecordFetcher } from './RecordFetcher';
 
 Amplify.configure({
   Auth: {
@@ -19,7 +20,7 @@ function App() {
               <div className="App">
                 <h1>Hello, {user.username}</h1>
                 <h1>Record SPA!</h1>
-                {/* <Url/> */}
+                <RecordFetcher/>
             </div>)
         }}
     </Authenticator>
