@@ -8,7 +8,7 @@ const lookup = async (recordName, setFetched, setRecordData) => {
     try {
         const response = await axios.post(recordSpaApi, { recordName });
         setFetched(true);
-        setRecordData('Success');
+        setRecordData(response.status);
     } catch (err) {
         console.log('err', err);
         setRecordData('An error occurred');
@@ -24,12 +24,14 @@ export const RecordFetcher = () => {
     const [recordName, setRecordName] = React.useState('');
     const [recordData, setRecordData] = React.useState('');
     const [fetched, setFetched] = React.useState(false);
-    return (<div>
-        <p>
-            <label style={{ fontSize: "22px" }} htmlFor="record">Record</label>
-        </p>
-        <p><input type="text" id="record" value={recordName} onChange={(event) => { setRecordName(event.target.value) }} /></p>
-        <button type="button" onClick={() => lookup(recordName, setFetched, setRecordData)}>Look up my record!</button>
-        {displayResults(fetched, recordData)}
-    </div>)
+    return (
+        <div>
+            <p>
+                <label style={{ fontSize: "22px" }} htmlFor="record">Record &nbsp;</label>
+                <input type="text" id="record" value={recordName} onChange={(event) => { setRecordName(event.target.value) }} />
+            </p>
+            <button type="button" onClick={() => lookup(recordName, setFetched, setRecordData)}>Look up my record!</button>
+            {displayResults(fetched, recordData)}
+        </div>
+        )
 }

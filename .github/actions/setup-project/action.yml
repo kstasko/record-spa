@@ -11,3 +11,7 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: yarn install --immutable --immutable-cache
+
+    - name: Build
+      shell: bash
+      run: yarn workspaces run build
