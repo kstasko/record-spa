@@ -1,0 +1,13 @@
+name: Setup Project
+description: Downloads project dependencies
+runs:
+  using: "composite"
+  steps:
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.13.1'
+
+    - name: Install Dependencies
+      shell: bash
+      run: yarn install --immutable --immutable-cache
