@@ -13,17 +13,18 @@ Amplify.configure({
 
 function App() {
   return <Authenticator>
-        {({ user }) => {
-          const session = user.getSignInUserSession();
-            if (!session) throw new Error("SignInSession is empty!");
-            return (
-              <div className="App">
-                <h1>Hello, {user.username}</h1>
-                <h1>Record SPA!</h1>
-                <RecordFetcher/>
-            </div>)
-        }}
-    </Authenticator>
+    {({ user }) => {
+      const session = user.getSignInUserSession();
+      if (!session) throw new Error("SignInSession is empty!");
+      const userIdToken = session.getIdToken();
+      return (
+        <div className="App">
+          <h1>Hello, {user.username}</h1>
+          <h1>Record SPA!</h1>
+          <RecordFetcher userToken={userIdToken.getJwtToken()} />
+        </div>)
+    }}
+  </Authenticator>
 }
 
 export default App;
